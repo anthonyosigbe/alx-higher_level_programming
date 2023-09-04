@@ -1,0 +1,2 @@
+#!/bin/bash
+Python3 $PYFILE 
