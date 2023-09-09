@@ -18,7 +18,6 @@ void print_python_list_info(PyObject *p)
 	for (index = 0; index < range; index++)
 	{
 		printf("Element %d: ", index);
-
 		obj = PyList_GetItem(p, index);
 		printf("%s\n", Py_TYPE(obj)->tp_name);
 	}
