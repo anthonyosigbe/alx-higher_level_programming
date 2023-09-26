@@ -51,10 +51,7 @@ class SinglyLinkedList:
             value (Node): The Node to be inserted.
         """
         new_node = Node(value)
-        if self.__head is None:
-            new_node.next_node = None
-            self.__head = new_node
-        elif self.__head.data > value:
+        if self.__head is None or value < self.__head.data:
             new_node.next_node = self.__head
             self.__head = new_node
         else:
@@ -62,8 +59,8 @@ class SinglyLinkedList:
             while (current.next_node is not None and
                     current.next_node.data < value):
                 current = current.next_node
-                new_node.next_node = current.next_node
-                current.next_node = new_node
+            new_node.next_node = current.next_node
+            current.next_node = new_node
 
     def __str__(self):
         """Specify the print() representation for a SinglyLinkedList."""
@@ -72,4 +69,4 @@ class SinglyLinkedList:
         while current is not None:
             result.append(str(current.data))
             current = current.next_node
-        return ("\n".join(result))
+        return "\n".join(result)
