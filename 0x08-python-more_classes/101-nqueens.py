@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Addresses the N-queens puzzle, which involves determining all valid solutions,
+"""Addresses the N-queens puzzle, which involves,
+determining all valid solutions,
 for placing N non-attacking queens on an NxN chessboard.
 
 Example:
@@ -104,7 +105,8 @@ def recursive_solve(board, row, queens, solutions):
         board (list): The current chessboard configuration.
         row (int): The current active row.
         queens (int): The current count of queens placed..
-        solutions (list): A collection of solutions represented as a list of lists.
+        solutions (list): A collection of solutions represented,
+        as a list of lists.
     Returns:
         solutions
     """
