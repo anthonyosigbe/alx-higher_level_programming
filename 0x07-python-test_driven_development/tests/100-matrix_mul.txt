@@ -1,0 +1,39 @@
+============================================
+Instructions for Utilizing 100-matrix_mul.py
+============================================
+
+This module establishes a function for multiplying matrices ``matrix_mul(m_a, m_b)``.
+
+Usage
+=====
+``matrix_mul(...)`` Produces a new matrix that represents the result of the multiplication of
+``m_a`` by ``m_b``.
+
+::
+
+    >>> matrix_mul = __import__('100-matrix_mul').matrix_mul
+    >>> m_a = [
+    ... [1, 2],
+    ... [3, 4],
+    ... ]
+    >>> m_b = m_a
+    >>> print(matrix_mul(m_a, m_b))
+    [[7, 10], [15, 22]]
+
+Invalid Matrices
+================
+
+The parameters ``m_a`` and ``m_b`` must be lists. If either parameter is
+not a list, a TypeError is raised.
+
+::
+
+    >>> print(matrix_mul("not a list", [[1, 2]]))
+    Traceback (most recent call last):
+    TypeError: m_a must be a list
+
+::
+
+    >>> print(matrix_mul([[1, 2]], "also not a list"))
+    Traceback (most recent call last):
+    TypeError: m_b must be a list
