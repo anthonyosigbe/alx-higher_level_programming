@@ -58,3 +58,19 @@ class Base:
                 json_attrs.append(elements.to_dictionary())
 
             return f.write(cls.to_json_string(json_attrs))
+
+    @staticmethod
+    def from_json_string(json_string):
+        """Provide the process of deserializing a JSON string.
+
+        Args:
+            json_string (str): A JSON string representation,
+            of a list of dictionaries.
+        Returns:
+            If the `json_string` is None or empty, return an empty list.
+            Otherwise - The Python list that corresponds to the `json_string`.
+        """
+        if json_string is None or len(json_string) == 0:
+            return []
+
+        return json.loads(json_string)
