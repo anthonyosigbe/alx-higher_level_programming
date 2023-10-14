@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Establishes the foundation for a model class."""
+from os import path
 import json
 
 
@@ -91,3 +92,28 @@ class Base:
 
         substitute.update(**dictionary)
         return substitute
+
+    @classmethod
+    def load_from_file(cls):
+        """Provide a list of classes created from a file,
+        containing JSON strings.
+
+        Reads from `<cls.__name__>.json`.
+
+        Returns:
+            If the file does not exist - an empty list.
+            Otherwise - a collection of instantiated classes.
+        """
+        filename = cls.__name__ + '.json'
+
+        if path.exists(filename) is False:
+            return []
+
+        with open(filename, mode='r', encoding='utf-8') as f:
+            objs = cls.from_json_string(f.read())
+            instances = []
+
+            for elem in objs:
+                instances.append(cls.create(**elem))
+
+            return instances
