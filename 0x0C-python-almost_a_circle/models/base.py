@@ -3,6 +3,7 @@
 from os import path
 import json
 import csv
+import turtle
 
 
 class Base:
@@ -126,7 +127,6 @@ class Base:
                 for obj in list_objs:
                     writer.writerow(obj.to_dictionary())
 
-
     @classmethod
     def load_from_file_csv(cls):
         """Return a list of classes instantiated from a CSV file.
@@ -150,3 +150,47 @@ class Base:
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Create Rectangles and Squares using the turtle
+        module to draw them.
+
+        Args:
+            list_rectangles (list): A collection of Rectangle objects,
+            to be used for drawing.
+            list_squares (list): A collection of Square,
+            objects to use for drawing.
+        """
+        turt = turtle.Turtle()
+        turt.screen.bgcolor("#b7312c")
+        turt.pensize(3)
+        turt.shape("turtle")
+
+        turt.color("#ffffff")
+        for rect in list_rectangles:
+            turt.showturtle()
+            turt.up()
+            turt.goto(rect.x, rect.y)
+            turt.down()
+            for i in range(2):
+                turt.forward(rect.width)
+                turt.left(90)
+                turt.forward(rect.height)
+                turt.left(90)
+            turt.hideturtle()
+
+        turt.color("#b5e3d8")
+        for sq in list_squares:
+            turt.showturtle()
+            turt.up()
+            turt.goto(sq.x, sq.y)
+            turt.down()
+            for i in range(2):
+                turt.forward(sq.width)
+                turt.left(90)
+                turt.forward(sq.height)
+                turt.left(90)
+            turt.hideturtle()
+
+        turtle.exitonclick()
