@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/iusr/bin/node
 
 const args = process.argv.slice(2).map(Number);
 
