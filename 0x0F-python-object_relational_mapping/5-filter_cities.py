@@ -14,26 +14,28 @@ if __name__ == '__main__':
     all cities of the specified state.
     """
 
-    if len(argv) != 5:
-        print("Usage: {} <username> <password> <database>\
-                <state_name>".format(argv[0]))
-        exit(1)
+    db = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                         passwd=argv[2], db=argv[3])
 
-    db_connection = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
-                                    passwd=argv[2], db=argv[3])
+    with db.cursor() as cur:
+        cur.execute("""
+            SELECT
+                cities.id, cities.name
+            FROM
+                cities
+            JOIN
+                states
+            ON
+                cities.state_id = states.id
+            WHERE
+                states.name LIKE BINARY %(state_name)s
+            ORDER BY
+                cities.id ASC
+        """, {
+            'state_name': argv[4]
+        })
 
-    cursor = db_connection.cursor()
+        rows = cur.fetchall()
 
-    query = "SELECT cities.id, cities.name, states.name FROM cities \
-             JOIN states ON cities.state_id = states.id \
-             WHERE states.name LIKE BINARY %s \
-             ORDER BY cities.id ASC"
-
-    cursor.execute(query, (argv[4],))
-
-    result_rows = cursor.fetchall()
-    for result_row in result_rows:
-        print(result_row)
-
-    cursor.close()
-    db_connection.close()
+    if rows is not None:
+        print(", ".join([row[1] for row in rows]))
