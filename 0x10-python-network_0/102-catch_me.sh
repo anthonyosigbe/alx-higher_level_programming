@@ -1,3 +1,3 @@
 #!/bin/bash
 # Makes a request to 0.0.0.0:5000/catch_me that gets the message "You got me!".
-curl -o /dev/null -sw "You got me!" 0.0.0.0:5000/catch_me
+curl -sL 0.0.0.0:5000/catch_me_3 -X PUT -H "Origin:You got me!"
